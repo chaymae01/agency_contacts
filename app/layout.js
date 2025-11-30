@@ -12,7 +12,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider localization={frFR}>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} // ← Ajouté ici
+      localization={frFR}
+    >
       <html lang="fr">
         <body className={inter.className}>
           {children}
