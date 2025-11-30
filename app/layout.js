@@ -1,7 +1,8 @@
 import { Inter } from 'next/font/google';
-import { ClerkProvider } from './ClerkProvider';
+import { ClerkProvider } from '@clerk/nextjs';
+import { frFR } from '@clerk/localizations';
 import './globals.css';
-export const dynamic = 'force-dynamic';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -13,7 +14,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={inter.className}>
-        <ClerkProvider>
+        <ClerkProvider
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+          localization={frFR}
+        >
           {children}
         </ClerkProvider>
       </body>
