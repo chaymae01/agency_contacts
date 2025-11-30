@@ -45,10 +45,4 @@ npm run dev
 ## 🌐 Deployment
 
 The application is deployed on **Vercel** and connected to **PostgreSQL (Railway)**.
-
-```
-
-  
-
-Just tell me!
-```
+`
