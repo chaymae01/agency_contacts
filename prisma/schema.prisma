@@ -1,11 +1,11 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
 }
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:chaymae2002@localhost:5433/gestion_contact_ag?schema=public"
+  url      = env("DATABASE_URL")
 }
 
 model agencies_agency_rows {
@@ -51,17 +51,16 @@ model contacts_contact_rows {
   agency           agencies_agency_rows? @relation(fields: [agency_id], references: [id])
 }
 
-
-
 model User {
-  id            String   @id @default(cuid())
-  clerkId       String   @unique
-  email         String
-  fullName      String?  // Nouveau champ
-  dailyViews    Int      @default(0)
-  lastViewDate  DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
- viewedContacts   String[] @default([]) // stocke les contactId déjà vus
+  id             String    @id @default(cuid())
+  clerkId        String    @unique
+  email          String
+  fullName       String?
+  dailyViews     Int       @default(0)
+  lastViewDate   DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  viewedContacts String[]  @default([])
+
   @@map("users")
 }
