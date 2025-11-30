@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Supprimez la section experimental pour Next.js 16
   images: {
     remotePatterns: [
       {
