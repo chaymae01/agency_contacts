@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:chaymae2002@localhost:5433/gestion_contact_ag?schema=public"
+}
+
+model agencies_agency_rows {
+  id                    String                  @id @default(uuid())
+  name                  String
+  state                 String?
+  state_code            String?
+  type                  String?
+  population            Int?
+  website               String?
+  total_schools         Int?
+  total_students        Int?
+  mailing_address       String?
+  grade_span            String?
+  locale                String?
+  csa_cbsa              String?
+  domain_name           String?
+  physical_address      String?
+  phone                 String?
+  status                String?
+  student_teacher_ratio Decimal?
+  supervisory_union     String?
+  county                String?
+  created_at            DateTime?
+  updated_at            DateTime?
+  contacts              contacts_contact_rows[]
+}
+
+model contacts_contact_rows {
+  id               String                @id @default(uuid())
+  first_name       String?
+  last_name        String?
+  email            String?
+  phone            String?
+  title            String?
+  email_type       String?
+  contact_form_url String?
+  created_at       DateTime?
+  updated_at       DateTime?
+  department       String?
+  agency_id        String?
+  firm_id          String?
+  agency           agencies_agency_rows? @relation(fields: [agency_id], references: [id])
+}
+
+
+
+model User {
+  id            String   @id @default(cuid())
+  clerkId       String   @unique
+  email         String
+  fullName      String?  // Nouveau champ
+  dailyViews    Int      @default(0)
+  lastViewDate  DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+ viewedContacts   String[] @default([]) // stocke les contactId déjà vus
+  @@map("users")
+}
